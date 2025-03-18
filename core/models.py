@@ -32,3 +32,4 @@ class Connection:
         self.liveness_count = 0
         self.stats_checks = 0
         self.last_connect = None
+        self.uptime_total = "0"  # Store uptime total from API
