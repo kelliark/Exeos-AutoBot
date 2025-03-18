@@ -1,2 +1,6 @@
 aiohttp
 rich
+asyncio
+python-dateutil
+pytz
+ujson
