@@ -1,81 +1,76 @@
-# ExeOS Auto Bot
+# ExeOS Bot
 
-ExeOS Bot is an asynchronous Python application that automates interactions with the ExeOS network. The bot logs into your ExeOS accounts, establishes extension connections (optionally using proxies), and continuously monitors connection statuses—all while displaying real-time updates using a visually appealing dashboard.
+An automated tool for managing ExeOS network nodes and maximizing rewards.
 
 # Register here:
 [Exeos Network](https://app.exeos.network?referralCode=REFJYMYYOZ8)
 
 Use my code: **REFJYMYYOZ8**
 
+
 ## Features
 
-- **Account Management:** Logs in using credentials provided in `accounts.json`.
-- **Proxy Support:** Optionally routes connections through proxies listed in `proxies.txt`.
-- **Asynchronous Operations:** Leverages `asyncio` and `aiohttp` for concurrent tasks.
-- **Live Status Dashboard:** Uses Rich for a real-time terminal UI.
-- **Logging:** Logs events and errors to both the console and daily log files in the `logs` directory.
-- **Extension Connection Management:** Automates connecting and monitoring extension statuses on the ExeOS network.
+- **Multi-Account Support**: Manage multiple ExeOS accounts from a single interface
+- **Auto Connection**: Automatically connect and maintain nodes on the ExeOS network
+- **Proxy Support**: Use proxies to distribute connections and avoid IP bans
+- **Real-time Monitoring**: Track connections, earnings, and node status in real-time
+- **Node ID Management**: Create and fetch node IDs for your accounts
+- **Beautiful Interface**: Rich console interface with detailed status panels
 
 ## Installation
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/kelliark/Exeos-AutoBot.git
-   cd Exeos-AutoBot
-   ```
+1. Clone the repository:
+```bash
+git clone https://github.com/kelliark/Exeos-AutoBot.git
+cd Exeos-AutoBot/
+```
 
-2. **Set Up a Virtual Environment (Optional but Recommended)**
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-3. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Configuration
-
-### Accounts
-
-Create an `accounts.json` file in the project root with your ExeOS account credentials. For example:
+3. Configure your accounts by creating an `accounts.json` file:
 ```json
 [
     {
-        "Email": "example@gmail.com",
-        "Password": "examplepassword"
-    },
-    {
-        "Email": "example2@gmail.com",
-        "Password": "examplepassword2"
+        "Email": "your_email@example.com",
+        "Password": "your_password",
+        "NodeIds": []
     }
-
-// you can add more via putting , on the 2nd part and the last part no coma
 ]
 ```
 
-### Proxies (Optional)
-
-If you want to use proxies, create a `proxies.txt` file in the project root. Each line should contain one proxy in the following format:
+4. (Optional) Add proxies in a `proxies.txt` file, one per line:
 ```
-http://username:password@proxyserver:port
-https://username:password@proxyserver:port
-socks5://username:password@proxyserver:port
-socks4://username:password@proxyserver:port
+http://username:password@host:port
+https://host:port
+socks5://host:port
 ```
-The bot will automatically test these proxies and use only the working ones.
 
 ## Usage
 
-Run the bot with the following command:
+Run the bot:
 ```bash
 python main.py
 ```
-## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request if you have suggestions, bug fixes, or enhancements.
+### Options
 
-## Disclaimer
+When you run the bot, you'll have three options:
 
-Use it at your own risk when using this bot. all risk are borne with the user.
+1. **Fetch Node IDs**: Retrieve existing node IDs for your accounts
+2. **Run Auto Farm**: Start the bot with existing accounts
+3. **Create New NodeIDs**: Generate new node IDs for your accounts
+
+## Tips for Best Results
+
+- Use high-quality proxies to avoid IP bans
+- Create multiple nodes per account (5-10 recommended)
+- Run the bot 24/7 for maximum earnings
+- Check logs regularly for any issues
+
+## Notes
+
+This tool is provided for educational purposes only. Use at your own risk. The developers are not responsible for any account bans or other issues that may arise from using this bot.
+If you find this tool helpful, consider leaving a star ⭐ on the repository!
