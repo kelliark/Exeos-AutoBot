@@ -62,6 +62,7 @@ When you run the bot, you'll have three options:
 1. **Fetch Node IDs**: Retrieve existing node IDs for your accounts
 2. **Run Auto Farm**: Start the bot with existing accounts
 3. **Create New NodeIDs**: Generate new node IDs for your accounts
+4. ""Do not run refetch nodes"": Just create a new one, they're kinda buggy for some server reason I guess
 
 ## Tips for Best Results
 
