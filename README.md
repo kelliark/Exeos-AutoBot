@@ -2,6 +2,11 @@
 
 ExeOS Bot is an asynchronous Python application that automates interactions with the ExeOS network. The bot logs into your ExeOS accounts, establishes extension connections (optionally using proxies), and continuously monitors connection statuses—all while displaying real-time updates using a visually appealing dashboard.
 
+# Register here:
+[Exeos Network](https://app.exeos.network?referralCode=REFJYMYYOZ8)
+
+Use my code: **REFJYMYYOZ8**
+
 ## Features
 
 - **Account Management:** Logs in using credentials provided in `accounts.json`.
