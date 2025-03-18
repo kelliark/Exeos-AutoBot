@@ -53,6 +53,17 @@ async def verify_proxy_connection(session, proxy=None):
 
 def format_duration(seconds):
     """Format duration in seconds to human-readable format"""
+    # Convert string to int if needed
+    if isinstance(seconds, str):
+        try:
+            seconds = int(seconds)
+        except ValueError:
+            seconds = 0
+    
+    # Fix for negative or extremely large seconds values
+    if seconds < 0 or seconds > 315360000:  # 10 years
+        return "0h 0m 0s"
+        
     hours, remainder = divmod(seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     return f"{int(hours)}h {int(minutes)}m {int(seconds)}s"
@@ -62,11 +73,11 @@ def create_status_panel(accounts):
     if not accounts:
         return Panel("No active accounts", title="ExeOS Bot Status", border_style="red")
     
-    now = datetime.now().timestamp()
+    now = datetime.now().timestamp()  # Define 'now' here
     main_table = Table(box=box.ROUNDED, expand=True, show_header=False)
     main_table.add_column("Content", style="white")
     
-    for idx, account in enumerate(accounts):
+    for idx, account in enumerate(accounts):  # 'account' is defined in this loop
         # Create account table
         account_table = Table(
             box=box.SIMPLE,
@@ -93,23 +104,33 @@ def create_status_panel(accounts):
             datetime.fromtimestamp(account.stats["lastUpdated"]).strftime('%H:%M:%S')
         account_table.add_row("Last Updated", last_updated)
         
-        # Add connections table
-        connections_table = Table(box=box.SIMPLE, expand=True, title="🔌 Active Connections", title_style="bold cyan")
+        # Add connections table - define it here within the account loop
+        connections_table = Table(box=box.SIMPLE, expand=True, title="Active Connections", title_style="bold cyan")
         connections_table.add_column("ID", style="dim")
         connections_table.add_column("Connects", style="green")
         connections_table.add_column("Liveness", style="blue")
         connections_table.add_column("IP", style="bright_magenta")
         connections_table.add_column("Last Active", style="yellow")
+        connections_table.add_column("Total Uptime", style="cyan")  # Add uptime column
         
         for conn in account.connections:
-            last_active = "Never" if not conn.last_connect else \
-                format_duration(now - conn.last_connect)
+            # Fix for the timestamp issue
+            if conn.last_connect:
+                time_diff = now - conn.last_connect
+                last_active = format_duration(time_diff) if time_diff > 0 else "Active now"
+            else:
+                last_active = "Never"
+                
+            # Display uptime from API if available
+            uptime_display = format_duration(conn.uptime_total) if hasattr(conn, 'uptime_total') and conn.uptime_total else "N/A"
+            
             connections_table.add_row(
                 f"{conn.extension_id[:8]}...", 
                 str(conn.connect_count),
                 str(conn.liveness_count),
                 str(conn.last_ip or "N/A"),
-                last_active
+                last_active,
+                uptime_display  # Add uptime column
             )
         
         # Add to main table
@@ -119,7 +140,7 @@ def create_status_panel(accounts):
     
     return Panel(
         main_table, 
-        title="🚀 ExeOS Bot Status", 
+        title="ExeOS Bot Status", 
         border_style="bright_blue",
         box=box.ROUNDED
     )
